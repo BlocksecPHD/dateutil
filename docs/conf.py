@@ -286,6 +286,8 @@ linkcheck_ignore = [
     r'https://pgp.mit.edu',
     # MetaCPAN frequently returns 402 for automated link checkers
     r"https://metacpan.org/.*",
+    # Oracle Java docs often fail TLS from CI runners
+    r"https://docs\.oracle\.com/.*",
 ]
 
 # Reduce problems with ephemeral failures
