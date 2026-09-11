@@ -7,8 +7,11 @@ from hypothesis import strategies as st
 
 from dateutil import tz
 
-EPOCHALYPSE = datetime.fromtimestamp(2147483647)
-NEGATIVE_EPOCHALYPSE = datetime.fromtimestamp(0) - timedelta(seconds=2147483648)
+# 32-bit Unix timestamp range as naive UTC. fromtimestamp() follows TZ, and
+# CI sets TZ=America/New_York, which would shift these bounds and let
+# hypothesis emit values before the first tzfile transition (LMT vs EST).
+EPOCHALYPSE = datetime(1970, 1, 1) + timedelta(seconds=2147483647)
+NEGATIVE_EPOCHALYPSE = datetime(1970, 1, 1) - timedelta(seconds=2147483648)
 
 
 @pytest.mark.gettz
